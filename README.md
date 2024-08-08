@@ -17,7 +17,7 @@ Pylint is a tool that checks for errors in Python code, enforces a coding standa
 This project provides a shell script `manager` to help manage multiple Python libraries. The libraries must be listed in the `Projects.txt` file.
 
 - **install/deploy**: Commands to install (developer mode) and deploy (production mode) all libraries.
-- **clone/status/pull/push/log/branch**: Execute git commands for all libraries.
+- **check_libs/status/pull/push/log**: Execute git commands for all libraries.
 - **todo**: List all TODO comments in the libraries.
 - **pack**: Compress all libraries into a .tar.gz file.
 - **count**: List the number of lines in each library.
@@ -27,7 +27,7 @@ This project provides a shell script `manager` to help manage multiple Python li
 The project must specify which Docker environment to use or how to prepare it.
 
 ```bash
-./manager clone
+./manager check_libs
 ./manager install
 ```
 

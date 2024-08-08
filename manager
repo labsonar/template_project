@@ -14,7 +14,7 @@ submodules=($(git config --file .gitmodules --get-regexp path | awk '{ print $2 
 libraries=($(cat Libraries.txt))
 
 case "$1" in
-	check)
+	check_libs)
 		for lib in "${libraries[@]}"
 		do
 			module_name=$(basename "$lib" .git | sed 's/\.git$//')
@@ -32,12 +32,14 @@ case "$1" in
 			print_library $module_name
 			if [ "$alredy_done" != true ]; then
 				echo "Adding submodule"
-				git submodule add $lib /lps_libraries/"$module_path"
+				git submodule add $lib "$module_path"
 			else
 				echo "Submodule already added"
 			fi
 
 		done
+
+		git submodule update --init --recursive
 	;;
 
 	status)
@@ -53,7 +55,7 @@ case "$1" in
 
 		status=$(git status -s)
 		if [ -n "$status" ]; then
-			print_library "$project_name"
+			print_library "$dir_name"
 			echo "$status"
 		fi
 	;;
@@ -88,7 +90,7 @@ case "$1" in
 			cd "$script_path"
 		done
 
-		print_library "$project_name"
+		print_library "$dir_name"
 		git pull
 		git fetch -f --tags
 	;;
@@ -101,7 +103,7 @@ case "$1" in
 			cd "$script_path"
 		done
 
-		print_library "$project_name"
+		print_library "$dir_name"
 		git push
 		git push -f --tags
 	;;
@@ -170,11 +172,11 @@ case "$1" in
 	;;
 	
 	list)
-		echo check status log pull push install deploy todo count pack list
+		echo check_libs status log pull push install deploy todo count pack list
 	;;
 
 	*)
-		echo "$script_name {check | status | log | pull | push | install | deploy | todo | count | pack | list}"
+		echo "$script_name {check_libs | status | log | pull | push | install | deploy | todo | count | pack | list}"
 		echo "Details in: $script_full"
 		exit 1
 	;;
