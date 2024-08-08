@@ -1,1 +1,1 @@
-template_library
+https://github.com/labsonar/template_library.git
