@@ -8,7 +8,8 @@ from the `template_library` package.
 
 import os
 import argparse
-import project_name.example as lib
+# import project_name.example as lib
+import project_lib_name.example as lib
 
 def main():
     """
